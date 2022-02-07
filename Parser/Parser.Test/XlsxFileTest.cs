@@ -1,5 +1,6 @@
 using Xunit;
 using FluentAssertions;
+using Parser.Logic;
 
 namespace Parser.Test
 {
