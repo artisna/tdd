@@ -2,10 +2,10 @@ using Xunit;
 
 namespace Parser.Test
 {
-    public class UnitTest1
+    public class XlsxFileTest
     {
         [Fact]
-        public void Test1()
+        public void RowsCount_ReturnValue()
         {
 
         }
