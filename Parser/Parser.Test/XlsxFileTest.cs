@@ -38,33 +38,20 @@ namespace Parser.Test
             rowsCount.Should().Be(rowsAmount);
         }
 
-        [Fact]
-        public void XlsxFile_WithOneInvalidRows_AlertIt()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void XlsxFile_WithInvalidRows_AlertIt(int invalidRowsAmount)
         {
             // arrange
             defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var rows = BuildRowsWithoutColumns(1);
+            var rows = BuildRowsWithoutColumns(invalidRowsAmount);
 
             // act
             var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
 
             // assert
-            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(1));
+            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(invalidRowsAmount));
         }
-
-        [Fact]
-        public void XlsxFile_WithTwoInvalidRows_AlertIt()
-        {
-            // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var rows = BuildRowsWithoutColumns(2);
-
-            // act
-            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
-
-            // assert
-            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(2));
-        }
-
     }
 }
