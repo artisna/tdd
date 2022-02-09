@@ -12,32 +12,20 @@ namespace Parser.Test
             return rows;
         }
 
-        [Fact]
-        public void RowsCount_ReturnValueTwo()
+        [Theory]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void RowsCount_ReturnValueOfRowsAmount(int rowsAmount)
         {
             // arrange
-            Row[] rows = BuildRowsWithoutColumns(2);
+            Row[] rows = BuildRowsWithoutColumns(rowsAmount);
             var xlsxFile = new XlsxFile(rows);
 
             // act
             var rowsCount = xlsxFile.RowsCount();
 
             // assert
-            rowsCount.Should().Be(2);
-        }
-
-        [Fact]
-        public void RowsCount_ReturnValueThree()
-        {
-            // arrange
-            var rows = BuildRowsWithoutColumns(3);
-            var xlsxFile = new XlsxFile(rows);
-
-            // act
-            var rowsCount = xlsxFile.RowsCount();
-
-            // assert
-            rowsCount.Should().Be(3);
+            rowsCount.Should().Be(rowsAmount);
         }
     }
 }
