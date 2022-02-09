@@ -10,7 +10,7 @@ namespace Parser.Test
         public void RowsCount_ReturnValueTwo()
         {
             // arrange
-            var rows = new[] { new Row(), new Row() };
+            var rows = new[] { new Row(null), new Row(null) };
             var xlsxFile = new XlsxFile(rows);
 
             // act
@@ -24,7 +24,7 @@ namespace Parser.Test
         public void RowsCount_ReturnValueThree()
         {
             // arrange
-            var rows = new[] { new Row(), new Row(), new Row() };
+            var rows = new[] { new Row(null), new Row(null), new Row(null) };
             var xlsxFile = new XlsxFile(rows);
 
             // act

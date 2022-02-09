@@ -2,9 +2,16 @@
 {
     public class Row
     {
+        private readonly IEnumerable<Column> columns;
+
+        public Row(IEnumerable<Column> columns)
+        {
+            this.columns = columns;
+        }
+
         public bool IsValid()
         {
-            return false;
+            return columns.Count() == 3;
         }
     }
 }

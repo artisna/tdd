@@ -15,7 +15,7 @@ namespace Parser.Test
         public void Row_WithoutColumns_IsInvalid()
         {
             // arrange
-            var row = new Row();
+            var row = new Row(null);
 
             // act
             var validationResult = row.IsValid();
@@ -28,7 +28,8 @@ namespace Parser.Test
         public void Row_WithThreeColumns_IsValid()
         {
             // arrange
-            var row = new Row();
+            var columns = new[] { new Column(), new Column(), new Column() };
+            var row = new Row(columns);
 
             // act
             var validationResult = row.IsValid();
