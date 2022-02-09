@@ -19,6 +19,17 @@ namespace Parser.Test
             return rows;
         }
 
+        private static Column[] BuildColumns(int columnsCount)
+        {
+            var rows = new Column[columnsCount];
+            for (var i = 0; i < columnsCount; ++i)
+            {
+                rows[i] = new Column();
+            }
+
+            return rows;
+        }
+
         private Mock<IAlertProvider> defaultAlertProviderMock = new Mock<IAlertProvider>();
 
         [Theory]
@@ -52,6 +63,20 @@ namespace Parser.Test
 
             // assert
             defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(invalidRowsAmount));
+        }
+
+        [Fact]
+        public void XlsxFile_WithValidRows_NotAlertIt()
+        {
+            // arrange
+            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
+            var rows = new[] { new Row(BuildColumns(3)) };
+
+            // act
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
+
+            // assert
+            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Never);
         }
     }
 }
