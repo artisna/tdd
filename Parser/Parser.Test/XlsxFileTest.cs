@@ -11,6 +11,11 @@ namespace Parser.Test
         private static Row[] BuildRowsWithoutColumns(int rowsCount)
         {
             var rows = new Row[rowsCount];
+            for (var i = 0; i < rowsCount; ++i)
+            {
+                rows[i] = new Row(null);
+            }
+
             return rows;
         }
 
@@ -22,6 +27,7 @@ namespace Parser.Test
         public void RowsCount_ReturnValueOfRowsAmount(int rowsAmount)
         {
             // arrange
+            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
             Row[] rows = BuildRowsWithoutColumns(rowsAmount);
             var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
 

@@ -9,13 +9,24 @@
         {
             this.alertProvider = alertProvider;
 
-            this.alertProvider.Alert("invalid row");
+            this.ValidateRows(rows);
             this.rows = rows;
         }
 
         public object RowsCount()
         {
             return rows.Count();
+        }
+
+        private void ValidateRows(IEnumerable<Row> rows)
+        {
+            foreach (var row in rows)
+            {
+                if (!row.IsValid())
+                {
+                    this.alertProvider.Alert("Row is invalid");
+                }
+            }
         }
     }
 }
