@@ -6,11 +6,17 @@ namespace Parser.Test
 {
     public class XlsxFileTest
     {
+        private static Row[] BuildRowsWithoutColumns(int rowsCount)
+        {
+            var rows = new Row[rowsCount];
+            return rows;
+        }
+
         [Fact]
         public void RowsCount_ReturnValueTwo()
         {
             // arrange
-            var rows = new[] { new Row(null), new Row(null) };
+            Row[] rows = BuildRowsWithoutColumns(2);
             var xlsxFile = new XlsxFile(rows);
 
             // act
@@ -24,7 +30,7 @@ namespace Parser.Test
         public void RowsCount_ReturnValueThree()
         {
             // arrange
-            var rows = new[] { new Row(null), new Row(null), new Row(null) };
+            var rows = BuildRowsWithoutColumns(3);
             var xlsxFile = new XlsxFile(rows);
 
             // act
@@ -33,6 +39,5 @@ namespace Parser.Test
             // assert
             rowsCount.Should().Be(3);
         }
-
     }
 }
