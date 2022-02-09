@@ -23,5 +23,18 @@ namespace Parser.Test
             // assert
             validationResult.Should().BeFalse();
         }
+
+        [Fact]
+        public void Row_WithThreeColumns_IsValid()
+        {
+            // arrange
+            var row = new Row();
+
+            // act
+            var validationResult = row.IsValid();
+
+            // assert
+            validationResult.Should().BeTrue();
+        }
     }
 }
