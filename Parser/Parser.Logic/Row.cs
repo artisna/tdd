@@ -11,6 +11,9 @@
 
         public bool IsValid()
         {
+            if (columns == null)
+                return false;
+
             return columns.Count() == 3;
         }
     }
