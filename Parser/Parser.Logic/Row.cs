@@ -2,5 +2,9 @@
 {
     public class Row
     {
+        public bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
