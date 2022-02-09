@@ -4,7 +4,7 @@
     {
         public bool IsValid()
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
