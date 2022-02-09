@@ -33,7 +33,7 @@ namespace Parser.Test
         }
 
         [Fact]
-        public void XlsxFile_WithInvalidRows_AlertIt()
+        public void XlsxFile_WithOneInvalidRows_AlertIt()
         {
             // arrange
             defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
