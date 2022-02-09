@@ -2,13 +2,16 @@
 {
     public class XlsxFile
     {
-        public XlsxFile()
+        private readonly IEnumerable<Row> rows;
+
+        public XlsxFile(IEnumerable<Row> rows)
         {
+            this.rows = rows;
         }
 
         public object RowsCount()
         {
-            return 2;
+            return rows.Count();
         }
     }
 }
