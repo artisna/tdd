@@ -2,6 +2,7 @@
 {
     public class Row
     {
+        private const int ValidRowColumnsAmount = 3;
         private readonly IEnumerable<Column> columns;
 
         public Row(IEnumerable<Column> columns)
@@ -14,7 +15,7 @@
             if (columns == null)
                 return false;
 
-            return columns.Count() == 3;
+            return columns.Count() == ValidRowColumnsAmount;
         }
     }
 }
