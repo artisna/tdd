@@ -3,9 +3,11 @@
     public class XlsxFile
     {
         private readonly IEnumerable<Row> rows;
+        private readonly IAlertProvider alertProvider;
 
-        public XlsxFile(IEnumerable<Row> rows)
+        public XlsxFile(IAlertProvider alertProvider, IEnumerable<Row> rows)
         {
+            this.alertProvider = alertProvider;
             this.rows = rows;
         }
 
