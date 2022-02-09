@@ -8,6 +8,8 @@
         public XlsxFile(IAlertProvider alertProvider, IEnumerable<Row> rows)
         {
             this.alertProvider = alertProvider;
+
+            this.alertProvider.Alert("invalid row");
             this.rows = rows;
         }
 
