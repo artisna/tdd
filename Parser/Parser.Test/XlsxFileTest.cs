@@ -45,5 +45,20 @@ namespace Parser.Test
             // assert
             defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(1));
         }
+
+        [Fact]
+        public void XlsxFile_WithTwoInvalidRows_AlertIt()
+        {
+            // arrange
+            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
+            var rows = BuildRowsWithoutColumns(2);
+
+            // act
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
+
+            // assert
+            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(2));
+        }
+
     }
 }
