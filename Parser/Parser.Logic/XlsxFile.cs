@@ -8,7 +8,7 @@
 
         public object RowsCount()
         {
-            throw new NotImplementedException();
+            return 2;
         }
     }
 }
