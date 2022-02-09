@@ -18,5 +18,19 @@ namespace Parser.Test
             // assert
             rowsCount.Should().Be(2);
         }
+
+        [Fact]
+        public void RowsCount_ReturnValueThree()
+        {
+            // arrange
+            var xlsxFile = new XlsxFile();
+
+            // act
+            var rowsCount = xlsxFile.RowsCount();
+
+            // assert
+            rowsCount.Should().Be(3);
+        }
+
     }
 }
