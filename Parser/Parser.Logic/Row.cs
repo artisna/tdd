@@ -13,12 +13,11 @@
             this.columns = columns;
         }
 
+        public int ColumnsCount => this.columns?.Count() ?? 0;
+
         public bool IsValid()
         {
-            if (columns == null)
-                return false;
-
-            return columns.Count() == validRowColumnsAmount;
+            return this.ColumnsCount == validRowColumnsAmount;
         }
     }
 }
