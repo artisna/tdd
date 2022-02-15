@@ -22,7 +22,7 @@
             }
         }
 
-        public bool IsParsed { get; set; }
+        public bool IsParsed { get => true; }
 
         public object RowsCount()
         {
