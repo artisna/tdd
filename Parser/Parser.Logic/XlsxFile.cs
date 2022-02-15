@@ -10,6 +10,7 @@
         {
             this.alertProvider = alertProvider;
             this.storageProvider = storageProvider;
+            this.storageProvider.Save(this);
 
             this.ValidateRows(rows);
             this.rows = rows;
