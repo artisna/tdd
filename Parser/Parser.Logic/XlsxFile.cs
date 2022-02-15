@@ -15,14 +15,14 @@
             this.rows = rows;
 
             // TODO: investigate criterion of completed parsing
-            var isParsed = this.rows.All(r => r.IsValid());
-            if (isParsed)
+            this.IsParsed = this.rows.All(r => r.IsValid());
+            if (this.IsParsed)
             {
                 this.storageProvider.Save(this);
             }
         }
 
-        public bool IsParsed { get => true; }
+        public bool IsParsed { get; private set; }
 
         public object RowsCount()
         {
