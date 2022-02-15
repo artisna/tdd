@@ -94,5 +94,19 @@ namespace Parser.Test
             // assert
             defaultStorageProviderMock.Verify(a => a.Save(It.IsAny<XlsxFile>()), Times.Once);
         }
+
+        [Fact]
+        public void XlsxFile_WithNotParsedRows_NotLoadedToStorage()
+        {
+            // arrange
+            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
+            var rows = new[] { new Row(BuildColumns(2)) };
+
+            // act
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, rows);
+
+            // assert
+            defaultStorageProviderMock.Verify(a => a.Save(It.IsAny<XlsxFile>()), Times.Never);
+        }
     }
 }
