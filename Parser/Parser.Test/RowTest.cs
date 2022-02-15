@@ -37,5 +37,19 @@ namespace Parser.Test
             // assert
             validationResult.Should().BeTrue();
         }
+
+        [Fact]
+        public void Row_WithFourColumns_IsValidCsvRow()
+        {
+            // arrange
+            var columns = new[] { new Column(), new Column(), new Column(), new Column() };
+            var row = new Row(columns);
+
+            // act
+            var validationResult = row.IsValid();
+
+            // assert
+            validationResult.Should().BeTrue();
+        }
     }
 }
