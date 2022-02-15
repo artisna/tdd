@@ -4,10 +4,12 @@
     {
         private readonly IEnumerable<Row> rows;
         private readonly IAlertProvider alertProvider;
+        private readonly IStorageProvider storageProvider;
 
-        public XlsxFile(IAlertProvider alertProvider, IEnumerable<Row> rows)
+        public XlsxFile(IAlertProvider alertProvider, IStorageProvider storageProvider, IEnumerable<Row> rows)
         {
             this.alertProvider = alertProvider;
+            this.storageProvider = storageProvider;
 
             this.ValidateRows(rows);
             this.rows = rows;

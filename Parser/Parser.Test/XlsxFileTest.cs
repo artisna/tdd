@@ -31,6 +31,8 @@ namespace Parser.Test
         }
 
         private Mock<IAlertProvider> defaultAlertProviderMock = new Mock<IAlertProvider>();
+        private Mock<IStorageProvider> defaultStorageProviderMock = new Mock<IStorageProvider>();
+
 
         [Theory]
         [InlineData(2)]
@@ -40,7 +42,7 @@ namespace Parser.Test
             // arrange
             defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
             Row[] rows = BuildRowsWithoutColumns(rowsAmount);
-            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, rows);
 
             // act
             var rowsCount = xlsxFile.RowsCount();
@@ -59,7 +61,7 @@ namespace Parser.Test
             var rows = BuildRowsWithoutColumns(invalidRowsAmount);
 
             // act
-            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, rows);
 
             // assert
             defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(invalidRowsAmount));
@@ -73,10 +75,24 @@ namespace Parser.Test
             var rows = new[] { new Row(BuildColumns(3)) };
 
             // act
-            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, rows);
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, rows);
 
             // assert
             defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Never);
+        }
+
+        [Fact]
+        public void XlsxFile_WithParsedRows_ItIsLoadedToStorage()
+        {
+            // arrange
+            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
+            var rows = new[] { new Row(BuildColumns(3)) };
+
+            // act
+            var xlsxFile = new XlsxFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, rows);
+
+            // assert
+            defaultStorageProviderMock.Verify(a => a.Save(It.IsAny<XlsxFile>()), Times.Once);
         }
     }
 }
