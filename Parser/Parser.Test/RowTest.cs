@@ -43,7 +43,7 @@ namespace Parser.Test
         {
             // arrange
             var columns = new[] { new Column(), new Column(), new Column(), new Column() };
-            var row = new Row(columns);
+            var row = new Row(columns, validRowColumnsAmount: 4);
 
             // act
             var validationResult = row.IsValid();
