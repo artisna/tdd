@@ -10,10 +10,16 @@
         {
             this.alertProvider = alertProvider;
             this.storageProvider = storageProvider;
-            this.storageProvider.Save(this);
 
             this.ValidateRows(rows);
             this.rows = rows;
+
+            // TODO: investigate criterion of completed parsing
+            var isParsed = this.rows.All(r => r.IsValid());
+            if (isParsed)
+            {
+                this.storageProvider.Save(this);
+            }
         }
 
         public object RowsCount()
