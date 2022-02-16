@@ -29,20 +29,19 @@ namespace Parser.Test
             return rows;
         }
 
-        private Mock<IAlertProvider> defaultAlertProviderMock = new Mock<IAlertProvider>();
-        private Mock<IStorageProvider> defaultStorageProviderMock = new Mock<IStorageProvider>();
-
-
         [Theory]
         [InlineData(2)]
         [InlineData(3)]
         public void RowsCount_ReturnValueOfRowsAmount(int rowsAmount)
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
+            var fileSettingsStub = new XlsxFileSettingsStub();
             Row[] rows = BuildRowsWithoutColumns(rowsAmount);
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                rows);
 
             // act
             var rowsCount = xlsxFile.RowsCount();
@@ -57,72 +56,83 @@ namespace Parser.Test
         public void XlsxFile_WithInvalidRows_AlertIt(int invalidRowsAmount)
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
+            var fileSettingsStub = new XlsxFileSettingsStub();
             var rows = BuildRowsWithoutColumns(invalidRowsAmount);
 
             // act
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                rows);
 
             // assert
-            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(invalidRowsAmount));
+            fileSettingsStub.AlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Exactly(invalidRowsAmount));
         }
 
         [Fact]
         public void XlsxFile_WithValidRows_NotAlertIt()
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
-            var rows = new[] { new Row(BuildColumns(3)) };
+            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.ValidRows);
 
             // assert
-            defaultAlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Never);
+            fileSettingsStub.AlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Never);
         }
 
         [Fact]
         public void XlsxFile_WithParsedRows_ItIsLoadedToStorage()
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
-            var rows = new[] { new Row(BuildColumns(3)) };
+            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.ValidRows);
 
             // assert
-            defaultStorageProviderMock.Verify(a => a.Save(It.IsAny<ParsedFile>()), Times.Once);
+            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<ParsedFile>()), Times.Once);
         }
 
         [Fact]
         public void XlsxFile_WithNotParsedRows_NotLoadedToStorage()
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
-            var rows = new[] { new Row(BuildColumns(2)) };
+            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.InvalidRows);
 
             // assert
-            defaultStorageProviderMock.Verify(a => a.Save(It.IsAny<ParsedFile>()), Times.Never);
+            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<ParsedFile>()), Times.Never);
         }
 
         [Fact]
         public void XlsxFile_WithParsedRows_MarkedAsParsed()
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
-            var rows = new[] { new Row(BuildColumns(3)) };
+            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object,xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.ValidRows);
 
             // assert
             xlsxFile.IsParsed.Should().BeTrue();
@@ -132,12 +142,14 @@ namespace Parser.Test
         public void XlsxFile_WithNotParsedRows_MarkedAsNotParsed()
         {
             // arrange
-            defaultAlertProviderMock.Setup(m => m.Alert(It.IsAny<string>()));
-            var xlsxRowValidator = new XlsxRowValidator();
-            var rows = new[] { new Row(BuildColumns(2)) };
+            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
-            var xlsxFile = new ParsedFile(defaultAlertProviderMock.Object, defaultStorageProviderMock.Object, xlsxRowValidator, rows);
+            var xlsxFile = new ParsedFile(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.InvalidRows);
 
             // assert
             xlsxFile.IsParsed.Should().BeFalse();
