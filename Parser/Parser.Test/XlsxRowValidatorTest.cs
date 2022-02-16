@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Parser.Logic;
+using Xunit;
 
 namespace Parser.Test
 {
-    public class RowTest
+    public class XlsxRowValidatorTest
     {
         [Fact]
         public void Row_WithoutColumns_IsInvalid()

@@ -1,15 +1,10 @@
 ﻿using FluentAssertions;
 using Parser.Logic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Parser.Test
 {
-    public class CsvFileTest
+    public class CsvRowValidatorTest
     {
         [Fact]
         public void CsvFileRow_WithFourColumns_IsValidCsvRow()
