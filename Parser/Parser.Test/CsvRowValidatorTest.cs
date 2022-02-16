@@ -7,7 +7,7 @@ namespace Parser.Test
     public class CsvRowValidatorTest
     {
         [Fact]
-        public void CsvFileRow_WithFourColumns_IsValidCsvRow()
+        public void CsvRow_WithFourColumns_IsValidCsvRow()
         {
             // arrange
             var csvRowValidator = new CsvRowValidator();

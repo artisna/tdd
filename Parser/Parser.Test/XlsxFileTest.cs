@@ -143,20 +143,5 @@ namespace Parser.Test
             // assert
             xlsxFile.IsParsed.Should().BeFalse();
         }
-
-        [Fact]
-        public void XlsxFileRow_WithThreeColumns_IsValidXlsxRow()
-        {
-            // arrange
-            var xlsxRowValidator = new XlsxRowValidator();
-            var columns = new[] { new Column(), new Column(), new Column() };
-            var row = new Row(columns);
-
-            // act
-            var validationResult = xlsxRowValidator.IsValid(row);
-
-            // assert
-            validationResult.Should().BeTrue();
-        }
     }
 }
