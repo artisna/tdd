@@ -1,17 +1,17 @@
 ﻿namespace Parser.Logic
 {
-    public class XlsxFile
+    public class ParsedFile
     {
         private readonly IEnumerable<Row> rows;
         private readonly IAlertProvider alertProvider;
         private readonly IStorageProvider storageProvider;
         private readonly IRowValidator rowValidator;
 
-        public XlsxFile(IAlertProvider alertProvider, IStorageProvider storageProvider, XlsxRowValidator xlsxRowValidator, IEnumerable<Row> rows)
+        public ParsedFile(IAlertProvider alertProvider, IStorageProvider storageProvider, IRowValidator rowValidator, IEnumerable<Row> rows)
         {
             this.alertProvider = alertProvider;
             this.storageProvider = storageProvider;
-            this.rowValidator = xlsxRowValidator;
+            this.rowValidator = rowValidator;
 
             this.ValidateRows(rows);
             this.rows = rows;
