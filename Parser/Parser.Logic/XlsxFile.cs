@@ -26,7 +26,7 @@
 
         public bool IsParsed { get; private set; }
 
-        public object RowsCount()
+        public int RowsCount()
         {
             return rows.Count();
         }
