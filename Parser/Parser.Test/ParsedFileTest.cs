@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Parser.Test
 {
-    public class ParsedFileTest
+    public abstract class ParsedFileTest
     {
         private static Row[] BuildRowsWithoutColumns(int rowsCount)
         {
@@ -18,16 +18,7 @@ namespace Parser.Test
             return rows;
         }
 
-        private static Column[] BuildColumns(int columnsCount)
-        {
-            var rows = new Column[columnsCount];
-            for (var i = 0; i < columnsCount; ++i)
-            {
-                rows[i] = new Column();
-            }
-
-            return rows;
-        }
+        protected FileSettingsStubBase fileSettingsStub;
 
         [Theory]
         [InlineData(2)]
@@ -35,7 +26,6 @@ namespace Parser.Test
         public void RowsCount_ReturnValueOfRowsAmount(int rowsAmount)
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
             Row[] rows = BuildRowsWithoutColumns(rowsAmount);
             var xlsxFile = new ParsedFile(
                 fileSettingsStub.AlertProviderMock.Object,
@@ -56,7 +46,6 @@ namespace Parser.Test
         public void XlsxFile_WithInvalidRows_AlertIt(int invalidRowsAmount)
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
             var rows = BuildRowsWithoutColumns(invalidRowsAmount);
 
             // act
@@ -74,7 +63,6 @@ namespace Parser.Test
         public void XlsxFile_WithValidRows_NotAlertIt()
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
             var xlsxFile = new ParsedFile(
@@ -91,7 +79,6 @@ namespace Parser.Test
         public void XlsxFile_WithParsedRows_ItIsLoadedToStorage()
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
             var xlsxFile = new ParsedFile(
@@ -108,7 +95,6 @@ namespace Parser.Test
         public void XlsxFile_WithNotParsedRows_NotLoadedToStorage()
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
             var xlsxFile = new ParsedFile(
@@ -125,7 +111,6 @@ namespace Parser.Test
         public void XlsxFile_WithParsedRows_MarkedAsParsed()
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
             var xlsxFile = new ParsedFile(
@@ -142,7 +127,6 @@ namespace Parser.Test
         public void XlsxFile_WithNotParsedRows_MarkedAsNotParsed()
         {
             // arrange
-            var fileSettingsStub = new XlsxFileSettingsStub();
 
             // act
             var xlsxFile = new ParsedFile(
