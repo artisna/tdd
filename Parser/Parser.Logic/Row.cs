@@ -15,9 +15,9 @@
 
         public int ColumnsCount => this.columns?.Count() ?? 0;
 
-        public bool IsValid()
-        {
-            return this.ColumnsCount == validRowColumnsAmount;
-        }
+        //public bool IsValid()
+        //{
+        //    return this.ColumnsCount == validRowColumnsAmount;
+        //}
     }
 }

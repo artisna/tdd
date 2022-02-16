@@ -15,10 +15,11 @@ namespace Parser.Test
         public void Row_WithoutColumns_IsInvalid()
         {
             // arrange
+            var xlsxRowValidator = new XlsxRowValidator();
             var row = new Row(null);
 
             // act
-            var validationResult = row.IsValid();
+            var validationResult = xlsxRowValidator.IsValid(row);
 
             // assert
             validationResult.Should().BeFalse();
