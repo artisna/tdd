@@ -1,13 +1,13 @@
 ﻿namespace Parser.Logic
 {
-    public class ParsedFile
+    public class File
     {
         private readonly IEnumerable<Row> rows;
         private readonly IAlertProvider alertProvider;
         private readonly IStorageProvider storageProvider;
         private readonly IRowValidator rowValidator;
 
-        public ParsedFile(IAlertProvider alertProvider, IStorageProvider storageProvider, IRowValidator rowValidator, IEnumerable<Row> rows)
+        public File(IAlertProvider alertProvider, IStorageProvider storageProvider, IRowValidator rowValidator, IEnumerable<Row> rows)
         {
             this.alertProvider = alertProvider;
             this.storageProvider = storageProvider;

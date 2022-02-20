@@ -1,6 +1,6 @@
 namespace Parser.Test
 {
-    public class CsvFileTest : ParsedFileTest
+    public class CsvFileTest : FileTest
     {
         public CsvFileTest()
         {

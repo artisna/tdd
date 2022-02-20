@@ -8,6 +8,6 @@ namespace Parser.Logic
 {
     public interface IStorageProvider
     {
-        void Save(ParsedFile xlsxFile);
+        void Save(File xlsxFile);
     }
 }

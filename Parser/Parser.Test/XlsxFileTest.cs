@@ -1,6 +1,6 @@
 namespace Parser.Test
 {
-    public class XlsxFileTest : ParsedFileTest
+    public class XlsxFileTest : FileTest
     {
         public XlsxFileTest()
         {

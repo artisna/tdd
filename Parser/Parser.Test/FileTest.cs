@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Parser.Test
 {
-    public abstract class ParsedFileTest
+    public abstract class FileTest
     {
         private static Row[] BuildRowsWithoutColumns(int rowsCount)
         {
@@ -27,7 +27,7 @@ namespace Parser.Test
         {
             // arrange
             Row[] rows = BuildRowsWithoutColumns(rowsAmount);
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
@@ -49,7 +49,7 @@ namespace Parser.Test
             var rows = BuildRowsWithoutColumns(invalidRowsAmount);
 
             // act
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
@@ -65,7 +65,7 @@ namespace Parser.Test
             // arrange
 
             // act
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
@@ -81,14 +81,14 @@ namespace Parser.Test
             // arrange
 
             // act
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.ValidRows);
 
             // assert
-            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<ParsedFile>()), Times.Once);
+            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Once);
         }
 
         [Fact]
@@ -97,14 +97,14 @@ namespace Parser.Test
             // arrange
 
             // act
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.InvalidRows);
 
             // assert
-            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<ParsedFile>()), Times.Never);
+            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Never);
         }
 
         [Fact]
@@ -113,7 +113,7 @@ namespace Parser.Test
             // arrange
 
             // act
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
@@ -129,7 +129,7 @@ namespace Parser.Test
             // arrange
 
             // act
-            var xlsxFile = new ParsedFile(
+            var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
                 fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
