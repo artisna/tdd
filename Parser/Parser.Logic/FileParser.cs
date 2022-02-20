@@ -10,7 +10,7 @@ namespace Parser.Logic
     {
         public void Parse(File parsedFile)
         {
-            throw new NotImplementedException();
+            parsedFile.ToggleParsed(false);
         }
     }
 }

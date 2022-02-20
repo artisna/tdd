@@ -26,6 +26,11 @@
 
         public bool IsParsed { get; private set; }
 
+        public void ToggleParsed(bool toggleValue)
+        {
+            this.IsParsed = toggleValue;
+        }
+
         public int RowsCount()
         {
             return rows.Count();
