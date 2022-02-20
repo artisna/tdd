@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{D2692C28-85E6-4911-8C91-4D4A0885644A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parser", "Parser\Parser.csproj", "{D2692C28-85E6-4911-8C91-4D4A0885644A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Test", "Parser.Test\Parser.Test.csproj", "{0AB31F3D-984B-45AD-A293-6D0A59F96900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parser.Test", "Parser.Test\Parser.Test.csproj", "{0AB31F3D-984B-45AD-A293-6D0A59F96900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Logic", "Parser.Logic\Parser.Logic.csproj", "{3026C8C2-0E95-40C6-8C64-83B2BFC85C23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parser.Logic", "Parser.Logic\Parser.Logic.csproj", "{3026C8C2-0E95-40C6-8C64-83B2BFC85C23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
