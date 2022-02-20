@@ -122,21 +122,5 @@ namespace Parser.Test
             // assert
             xlsxFile.IsParsed.Should().BeTrue();
         }
-
-        [Fact]
-        public void XlsxFile_WithNotParsedRows_MarkedAsNotParsed()
-        {
-            // arrange
-
-            // act
-            var xlsxFile = new File(
-                fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
-                fileSettingsStub.RowValidator,
-                fileSettingsStub.InvalidRows);
-
-            // assert
-            xlsxFile.IsParsed.Should().BeFalse();
-        }
     }
 }
