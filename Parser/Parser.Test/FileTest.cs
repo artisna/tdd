@@ -106,21 +106,5 @@ namespace Parser.Test
             // assert
             fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Never);
         }
-
-        [Fact]
-        public void XlsxFile_WithParsedRows_MarkedAsParsed()
-        {
-            // arrange
-
-            // act
-            var xlsxFile = new File(
-                fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
-                fileSettingsStub.RowValidator,
-                fileSettingsStub.ValidRows);
-
-            // assert
-            xlsxFile.IsParsed.Should().BeTrue();
-        }
     }
 }

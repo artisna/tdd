@@ -35,5 +35,23 @@ namespace Parser.Test
             // assert
             xlsxFile.IsParsed.Should().BeFalse();
         }
+
+        [Fact]
+        public void Parse_XlsxFileWithParsedRows_MarkedAsParsed()
+        {
+            // arrange
+            var xlsxFile = new File(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.ValidRows);
+            var parser = new FileParser();
+
+            // act
+            parser.Parse(xlsxFile);
+
+            // assert
+            xlsxFile.IsParsed.Should().BeTrue();
+        }
     }
 }
