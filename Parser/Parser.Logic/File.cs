@@ -17,12 +17,14 @@
             this.rows = rows;
 
             // TODO: investigate criterion of completed parsing
-            this.IsParsed = this.rows.All(r => rowValidator.IsValid(r));
+            this.IsParsed = IsAllRowsValid();
             if (this.IsParsed)
             {
                 this.storageProvider.Save(this);
             }
         }
+
+        public bool IsAllRowsValid() => this.rows.All(r => rowValidator.IsValid(r));
 
         public bool IsParsed { get; private set; }
 

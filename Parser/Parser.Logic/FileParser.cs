@@ -10,7 +10,8 @@ namespace Parser.Logic
     {
         public void Parse(File parsedFile)
         {
-            parsedFile.ToggleParsed(false);
+            var isFileParsed = parsedFile.IsAllRowsValid();
+            parsedFile.ToggleParsed(isFileParsed);
         }
     }
 }
