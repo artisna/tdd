@@ -74,37 +74,5 @@ namespace Parser.Test
             // assert
             fileSettingsStub.AlertProviderMock.Verify(a => a.Alert(It.IsAny<string>()), Times.Never);
         }
-
-        [Fact]
-        public void XlsxFile_WithParsedRows_ItIsLoadedToStorage()
-        {
-            // arrange
-
-            // act
-            var xlsxFile = new File(
-                fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
-                fileSettingsStub.RowValidator,
-                fileSettingsStub.ValidRows);
-
-            // assert
-            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Once);
-        }
-
-        [Fact]
-        public void XlsxFile_WithNotParsedRows_NotLoadedToStorage()
-        {
-            // arrange
-
-            // act
-            var xlsxFile = new File(
-                fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
-                fileSettingsStub.RowValidator,
-                fileSettingsStub.InvalidRows);
-
-            // assert
-            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Never);
-        }
     }
 }

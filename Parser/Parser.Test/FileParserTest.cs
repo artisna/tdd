@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Moq;
 using Parser.Logic;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,42 @@ namespace Parser.Test
 
             // assert
             xlsxFile.IsParsed.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Parse_XlsxFileWithParsedRows_LoadedToStorage()
+        {
+            // arrange
+            var xlsxFile = new File(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.ValidRows);
+            var parser = new FileParser();
+
+            // act
+            parser.Parse(xlsxFile);
+
+            // assert
+            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Once);
+        }
+
+        [Fact]
+        public void Parse_XlsxFileWithNotParsedRows_NotLoadedToStorage()
+        {
+            // arrange
+            var xlsxFile = new File(
+                fileSettingsStub.AlertProviderMock.Object,
+                fileSettingsStub.StorageProviderMock.Object,
+                fileSettingsStub.RowValidator,
+                fileSettingsStub.InvalidRows);
+            var parser = new FileParser();
+
+            // act
+            parser.Parse(xlsxFile);
+
+            // assert
+            fileSettingsStub.StorageProviderMock.Verify(a => a.Save(It.IsAny<File>()), Times.Never);
         }
     }
 }
