@@ -29,7 +29,6 @@ namespace Parser.Test
             Row[] rows = BuildRowsWithoutColumns(rowsAmount);
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 rows);
 
@@ -51,7 +50,6 @@ namespace Parser.Test
             // act
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 rows);
 
@@ -67,7 +65,6 @@ namespace Parser.Test
             // act
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.ValidRows);
 

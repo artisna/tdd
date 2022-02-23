@@ -4,24 +4,15 @@
     {
         private readonly IEnumerable<Row> rows;
         private readonly IAlertProvider alertProvider;
-        private readonly IStorageProvider storageProvider;
         private readonly IRowValidator rowValidator;
 
-        public File(IAlertProvider alertProvider, IStorageProvider storageProvider, IRowValidator rowValidator, IEnumerable<Row> rows)
+        public File(IAlertProvider alertProvider, IRowValidator rowValidator, IEnumerable<Row> rows)
         {
             this.alertProvider = alertProvider;
-            this.storageProvider = storageProvider;
             this.rowValidator = rowValidator;
 
             this.ValidateRows(rows);
             this.rows = rows;
-
-            // TODO: investigate criterion of completed parsing
-            this.IsParsed = IsAllRowsValid();
-            if (this.IsParsed)
-            {
-                this.storageProvider.Save(this);
-            }
         }
 
         public bool IsAllRowsValid() => this.rows.All(r => rowValidator.IsValid(r));

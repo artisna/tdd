@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Parser.Logic
+﻿namespace Parser.Logic
 {
     public class FileParser : IFileParser
     {
+        private readonly IStorageProvider storageProvider;
+
+        public FileParser(IStorageProvider storageProvider)
+        {
+            this.storageProvider = storageProvider;
+        }
+
         public void Parse(File parsedFile)
         {
             var isFileParsed = parsedFile.IsAllRowsValid();
             parsedFile.ToggleParsed(isFileParsed);
+
+            if (isFileParsed)
+            {
+                this.storageProvider.Save(parsedFile);
+            }
         }
     }
 }

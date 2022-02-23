@@ -1,11 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
 using Parser.Logic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Parser.Test
@@ -25,10 +20,9 @@ namespace Parser.Test
             // arrange
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.InvalidRows);
-            var parser = new FileParser();
+            var parser = new FileParser(fileSettingsStub.StorageProviderMock.Object);
 
             // act
             parser.Parse(xlsxFile);
@@ -43,10 +37,9 @@ namespace Parser.Test
             // arrange
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.ValidRows);
-            var parser = new FileParser();
+            var parser = new FileParser(fileSettingsStub.StorageProviderMock.Object);
 
             // act
             parser.Parse(xlsxFile);
@@ -61,10 +54,9 @@ namespace Parser.Test
             // arrange
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.ValidRows);
-            var parser = new FileParser();
+            var parser = new FileParser(fileSettingsStub.StorageProviderMock.Object);
 
             // act
             parser.Parse(xlsxFile);
@@ -79,10 +71,9 @@ namespace Parser.Test
             // arrange
             var xlsxFile = new File(
                 fileSettingsStub.AlertProviderMock.Object,
-                fileSettingsStub.StorageProviderMock.Object,
                 fileSettingsStub.RowValidator,
                 fileSettingsStub.InvalidRows);
-            var parser = new FileParser();
+            var parser = new FileParser(fileSettingsStub.StorageProviderMock.Object);
 
             // act
             parser.Parse(xlsxFile);
